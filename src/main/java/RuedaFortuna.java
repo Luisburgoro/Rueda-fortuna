@@ -1,4 +1,4 @@
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RuedaFortuna {
@@ -6,25 +6,31 @@ public class RuedaFortuna {
     Scanner intro = new Scanner(System.in);
     private int[] casillas;
     int num;
+
+
     public void inicializarRueda(int numeroCasillas) {
+        System.out.println( "¿escoge cuantas casillas quieres?");
 
-        System.out.println("Cuantas casillas va a escoger ?");
-        numeroCasillas = intro.nextInt();
-
-
-
+        try {
+            numeroCasillas=intro.nextInt();
             casillas = new int[numeroCasillas];
 
+        }catch(NegativeArraySizeException e){
+            System.out.println("no se puede un numero negativo "+e);
 
-
+        }catch (InputMismatchException e) {
+            System.out.println("solo se permiten numeros y entradas que sean válidas " + e);
+            intro.next();
+        }
 
         if (numeroCasillas >= 4 && numeroCasillas <= 100) {
+
 
 
                 for (int i = 0; i < casillas.length; i++) {
 
                     System.out.println("girando...");
-                    casillas[i] = (int) (Math.random() * 999999999);
+                    casillas[i] = (int) (Math.random() * 99999);
 
                     // System.out.println(casillas[i]);//(opcional si quieren ver los números que imprime la consola)
                 }
@@ -33,6 +39,7 @@ public class RuedaFortuna {
                 System.out.println("\ningresa un numero mayor o igual a 4 y menor o igual a 100");
                 System.out.println("");
                 inicializarRueda(numeroCasillas);
+
             }
 
     }
@@ -40,36 +47,44 @@ public class RuedaFortuna {
 
     public int lanzarRueda() {
 
-         num = (int) (Math.random() * casillas.length + 0);
+        try {
+            num = (int) (Math.random() * casillas.length + 0);
 
+            return casillas[num];
+        }catch(NullPointerException e){
 
-
-        return casillas[num];
+        }
+        return 0;
     }
 
     public int mayorNum() {
         int mayor;
-        mayor = casillas[0];
-        for (int i = 0; i < casillas.length; i++) {
-            if (mayor < casillas[i]) {
-                mayor = casillas[i];
+      try {
+          mayor = casillas[0];
+          for (int i = 0; i < casillas.length; i++) {
+              if (mayor < casillas[i]) {
+                  mayor = casillas[i];
 
-            }
-        }
-        return mayor;
+              }
+          }
+          return mayor;
+      }catch (NullPointerException e){
 
-
+      }
+      return 1;
     }
 
     public void Ganaste(int mayor) {
+  try {
+      if (mayor == casillas[num]) {
 
-    if (mayor == casillas[num]) {
+          System.out.println("Ganaste!!!");
+      } else {
+          System.out.println("no obtuviste el máximo");
+      }
+  }catch(NullPointerException e){
 
-        System.out.println("Ganaste!!!");
-    } else {
-        System.out.println("no obtuviste el máximo");
-    }
-
+  }
 
     }
 

@@ -2,6 +2,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Scanner;
+
 import static org.junit.Assert.*;
 
 public class RuedaFortunaTest {
@@ -23,7 +25,8 @@ public class RuedaFortunaTest {
     @Test
     public void inicializarRueda() {
 
-
+            Rtest.inicializarRueda(1000000000);//me referia a ponerle un numero sobre el limite de lo que puede guardar la variable tipo int
+            Rtest.inicializarRueda(-3);// me referia a que resiva un arreglo de largo negativo
 
 
     }
@@ -32,16 +35,20 @@ public class RuedaFortunaTest {
     public void lanzarRueda() {
 
 
+        Rtest.lanzarRueda();//error con NullPointerException
+
     }
 
     @Test
     public void mayorNum() {
 
+        Rtest.mayorNum();//NullPointerException
 
     }
 
     @Test
     public void ganaste() {
-        Rtest.Ganaste(533333334);
+
+        Rtest.Ganaste(0);//NullPointerException
     }
 }
